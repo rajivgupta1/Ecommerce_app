@@ -1,9 +1,19 @@
 import React from 'react'
+import Header from '../../Layout/Header'
+import Footer from '../../Layout/Footer'
 
-function SignIn() {
+
+export const SignIn = () => {
   return (
-    <div>SignIn</div>
+    <div>
+      <Header />
+      <main className='main'> signIn
+
+      </main>
+
+      <Footer />
+
+    </div>
   )
 }
 
-export default SignIn
