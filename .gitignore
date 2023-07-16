@@ -1,0 +1,31 @@
+####Frontend parts
+
+redux toolkit
+react router dom
+react bootstrap
+react toastify
+react icon
+axios
+
+
+npm i axios @redusjs/toolkit 
+react-redux react-router-dom
+react-bootstrap react-toastify react-icons
+
+
+####Backend parts#####
+
+express mongoose
+cors
+morgan
+dot ev
+bcryptjs
+
+joi
+multer
+nodemailer
+jsonwebtoken
+
+
+npm i express mongoose cors morgan dotenv bcryptjs
+node_modules
