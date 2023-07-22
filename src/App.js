@@ -2,9 +2,9 @@ import "./App.css";
 
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import SignIn from "./signin-signUp/SignIn.js";
-import SignUp from "./signin-signUp/SignUp.js";
 
+import SignIn from "./Pages/signin-up/SignIn";
+import SignUp from "./Pages/signin-up/SignUp";
 function App() {
   return (
     <div className="">
