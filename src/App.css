@@ -1,5 +1,6 @@
 .main {
-  min-height: 83vh;
+  /* min-height: 83vh; */
+  background: rgba(205, 225, 255, 0.729);
 }
 
 .admin-layout {
@@ -16,7 +17,7 @@
 }
 
 .page-content {
-  height: 83vh;
+  min-height: 83vh;
 }
 
 .sid-nav li {
