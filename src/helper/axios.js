@@ -3,6 +3,7 @@ import axios from "axios";
 const rootAPI = process.env.REACT_APP_ROOTAPI;
 const admiAPI = rootAPI + "/admin";
 const catAPI = rootAPI + "/category";
+const poAPI = rootAPI + "/payment-option";
 
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
@@ -27,6 +28,20 @@ const axiosProcesor = async ({ method, url, obj, isPrivate, refreshToken }) => {
 
     return data;
   } catch (error) {
+    if (
+      error?.response?.status === 403 &&
+      error?.response?.data?.message === "jwt expired"
+    ) {
+      //1. get new accessJWt
+      const { status, accessJWT } = await getNewAccessJWT();
+      if (status === "success" && accessJWT) {
+        sessionStorage.setItem("accessJWT", accessJWT);
+      }
+
+      //2. continue the request
+
+      return axiosProcesor({ method, url, obj, isPrivate, refreshToken });
+    }
     return {
       status: "error",
       message: error.response ? error?.response?.data?.message : error.message,
@@ -105,7 +120,7 @@ export const deleteCategory = (_id) => {
 
 // ==========+ get new refreshJWT
 
-export const getNewRefreshJWT = () => {
+export const getNewAccessJWT = () => {
   const obj = {
     method: "get",
     url: admiAPI + "/get-accessjwt",
@@ -123,6 +138,46 @@ export const logoutAdmin = (_id) => {
       accessJWT: getAccessJWT(),
       refreshJWT: getRefreshJWT(),
     },
+  };
+  return axiosProcesor(obj);
+};
+
+// ========== Payment Option
+
+export const postNewPO = (data) => {
+  const obj = {
+    method: "post",
+    url: poAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+
+export const getNewPOs = () => {
+  const obj = {
+    method: "get",
+    url: poAPI,
+    isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+
+export const updateNewPOs = (data) => {
+  const obj = {
+    method: "put",
+    url: poAPI,
+    isPrivate: true,
+    obj: data,
+  };
+  return axiosProcesor(obj);
+};
+
+export const deletePO = (_id) => {
+  const obj = {
+    method: "delete",
+    url: poAPI + "/" + _id,
+    isPrivate: true,
   };
   return axiosProcesor(obj);
 };
