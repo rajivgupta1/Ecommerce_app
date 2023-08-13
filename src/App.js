@@ -17,6 +17,9 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCatsAction } from "./pages/category/categoryAction";
 import { PrivateRoute } from "./components/private/PrivateRoute";
+import NewProduct from "./pages/product/NewProduct";
+import EditProduct from "./pages/product/EditProduct";
+import ResetPassword from "./pages/signin-signup/ResetPassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +32,7 @@ function App() {
         {/* public routers */}
         <Route path="/" element={<SignIn />} />
         <Route path="admin-verification" element={<AdminVerification />} />
+        <Route path="password-rest" element={<ResetPassword />} />
 
         {/* private router */}
         <Route
@@ -52,6 +56,22 @@ function App() {
           element={
             <PrivateRoute>
               <Product />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="new-product"
+          element={
+            <PrivateRoute>
+              <NewProduct />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="product/edit/:_id"
+          element={
+            <PrivateRoute>
+              <EditProduct />
             </PrivateRoute>
           }
         />

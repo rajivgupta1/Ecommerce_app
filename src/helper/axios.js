@@ -4,6 +4,7 @@ const rootAPI = process.env.REACT_APP_ROOTAPI;
 const admiAPI = rootAPI + "/admin";
 const catAPI = rootAPI + "/category";
 const poAPI = rootAPI + "/payment-option";
+const productAPI = rootAPI + "/product";
 
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
@@ -178,6 +179,64 @@ export const deletePO = (_id) => {
     method: "delete",
     url: poAPI + "/" + _id,
     isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+
+// ========== Product
+
+export const postNewProduct = (data) => {
+  const obj = {
+    method: "post",
+    url: productAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+
+export const updateProduct = (data) => {
+  const obj = {
+    method: "put",
+    url: productAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+
+export const getProducts = (_id) => {
+  const obj = {
+    method: "get",
+    url: _id ? productAPI + "/" + _id : productAPI,
+    isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+
+export const deleteProduct = (_id) => {
+  const obj = {
+    method: "delete",
+    url: productAPI + "/" + _id,
+    isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+
+// ======== restet password
+export const requestPassOTP = (email) => {
+  const obj = {
+    method: "post",
+    url: admiAPI + "/request-opt",
+    obj: { email },
+  };
+  return axiosProcesor(obj);
+};
+export const resetPass = (data) => {
+  const obj = {
+    method: "post",
+    url: admiAPI + "/reset-password",
+    obj: data,
   };
   return axiosProcesor(obj);
 };
